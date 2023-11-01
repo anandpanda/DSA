@@ -142,18 +142,24 @@ public:
         }
     } 
     void itpostorder_1stack(Node* root){
-        vector<int> v;
         if(!root) return;
-        stack<Node*> s({root});
-        while(s.size()){
-            Node *t = s.top(); s.pop();
-            if(t){
-                v.push_back(t->data);
-                s.push(t->left);
-                s.push(t->right);
+        stack<Node*> s;
+        while(root || s.size()){
+            if(root){
+                s.push(root);
+                root = root->left;
+            }
+            else{
+                Node *temp = s.top()->right;
+                if(!temp){
+                    while(s.size() && temp == s.top()->right){
+                        temp = s.top(); s.pop();
+                        cout << temp->data << " ";
+                    }
+                }
+                else root = temp;
             }
         }
-        reverse(begin(v), end(v));
     }
 
 
