@@ -83,6 +83,30 @@ public:
             if(curr->left) s.push(curr->left);
         }
     }
+
+    //morris traversal preorder
+    void morrisPreorder(Node *root){
+        Node *cur = root;
+        while(cur){
+            if(!cur->left){
+                cout << cur->data << " ";
+                cur = cur->right;
+            }
+            else{
+                Node *pre = cur->left;
+                while(pre->right && pre->right != cur) pre = pre->right;
+                if(!pre->right){
+                    pre->right = cur;
+                    cout << cur->data << " ";
+                    cur = cur->left;
+                }
+                else{
+                    pre->right = NULL;
+                    cur = cur->right;
+                }
+            }
+        }
+    }
     
     //print tree by inorder traversal, left subtree root right subtree
     void inorder(Node* root) {
@@ -113,6 +137,29 @@ public:
         }
     }
     
+    //morris traversal inorder
+    void morrisInorder(Node *root){
+        Node *cur = root;
+        while(cur){
+            if(!cur->left){
+                cout << cur->data << " ";
+                cur = cur->right;
+            }
+            else{
+                Node *pre = cur->left;
+                while(pre->right && pre->right != cur) pre = pre->right;
+                if(!pre->right){
+                    pre->right = cur;
+                    cur = cur->left;
+                }
+                else{
+                    pre->right = NULL;
+                    cout << cur->data << " ";
+                    cur = cur->right;
+                }
+            }
+        }
+    }
 
     //print tree by postorder traversal, left subtree right subtree root
     void postorder(Node* root) {
