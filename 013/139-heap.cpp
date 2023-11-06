@@ -53,23 +53,23 @@ public:
     }
 };
 
-void heapify(int arr[], int n){
-    if(!n) return; 
+void heapify(int arr[], int n, bool mH = false){
     static int in = n/2;
-    int i = in;
-    while(i <= n/2){
-        if(arr[i] < arr[i*2]){
-            swap(arr[i], arr[i*2]);
-            i *= 2;
+    if(!in) return; 
+    int li = in, ri = in--, f = 0;
+    while(!f && li <= n/2 
+    && ri <= n/2){
+        f = 1;
+        if((mH? arr[li] > arr[li*2] : arr[li] < arr[li*2])){
+            swap(arr[li], arr[li*2]);
+            li *= 2, f = 0;
         }
-        else if(arr[i] < arr[i*2+1]){
-            swap(arr[i], arr[i*2+1]);
-            i = i*2 + 1;
+        if(2*ri+1 <= n && (mH? arr[ri] > arr[ri*2+1] : arr[ri] < arr[ri*2+1])){
+            swap(arr[ri], arr[ri*2+1]);
+            ri = ri*2+1, f = 0;
         }
-        else break;
     }
-    in--;
-    heapify(arr, n);
+    heapify(arr, n, mH);
 }
 
 int main(){
