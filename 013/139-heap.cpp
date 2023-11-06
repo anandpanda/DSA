@@ -46,15 +46,31 @@ public:
         }
     }
 
-    void heapify(){
-
-    }
 
     void print(){
         for(int i=1; i<=size; i++) cout << a[i] << " ";
         cout << endl;
     }
 };
+
+void heapify(int arr[], int n){
+    if(!n) return; 
+    static int in = n/2;
+    int i = in;
+    while(i <= n/2){
+        if(arr[i] < arr[i*2]){
+            swap(arr[i], arr[i*2]);
+            i *= 2;
+        }
+        else if(arr[i] < arr[i*2+1]){
+            swap(arr[i], arr[i*2+1]);
+            i = i*2 + 1;
+        }
+        else break;
+    }
+    in--;
+    heapify(arr, n);
+}
 
 int main(){
     
@@ -64,11 +80,13 @@ int main(){
     h.insert(55);
     h.insert(53);
     h.insert(52);
-    h.insert(54);
+    h.insert(54); // 5
 
     h.del();
-    h.print();
+    // h.print();
 
-
+    int arr[] = {-1, 50, 55, 53, 52, -2, 54};
+    heapify(arr, 6);
+    for(int i=1; i<=6; i++) cout << arr[i] << " ";
     return 0;
 }
