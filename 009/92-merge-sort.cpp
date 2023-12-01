@@ -7,42 +7,32 @@ void merge(int arr[], int s, int e)
 {
     int mid = s + (e - s) / 2;
 
-    int len1 = mid - s + 1;
-    int len2 = e - mid;
+    int len1 = mid - s + 2;
+    int len2 = e - mid + 1;
 
     // making two arrays
     int *first = new int[len1];
     int *second = new int[len2];
+    first[len1 - 1] = second[len2 - 1] = INT_MAX; // sentinels
 
     // copying half arrays
-    int mainIndex = s;
-    for (int i = 0; i < (len1 + len2); i++)
-    {
-        if (i < len1)
-            first[i] = arr[mainIndex++];
-        else
-            second[i - (len1)] = arr[mainIndex++];
-    }
-    // for (int i = 0; i < len1; i++)
-    //     first[i] = arr[mainIndex++];
-    // for (int i = 0; i < len2; i++)
-    //     second[i] = arr[mainIndex++];
+    int mainIn = s;
+    for (int i = 0; i < len1-1; i++)
+        first[i] = arr[mainIn++];
+    for (int i = 0; i < len2-1; i++)
+        second[i] = arr[mainIn++];
 
     // merging 2 sorted arrays
     int i = 0, j = 0;
-    mainIndex = s;
+    mainIn = s;
 
-    while (i < len1 && j < len2)
+    while (mainIn <= e)
     {
         if (first[i] < second[j])
-            arr[mainIndex++] = first[i++];
+            arr[mainIn++] = first[i++];
         else
-            arr[mainIndex++] = second[j++];
+            arr[mainIn++] = second[j++];
     }
-    while (i < len1)
-        arr[mainIndex++] = first[i++];
-    while (j < len2)
-        arr[mainIndex++] = second[j++];
 
     delete[] first;
     delete[] second;
