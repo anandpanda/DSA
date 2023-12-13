@@ -72,7 +72,7 @@ public:
         }
     }
 
-    void threadedPreorder(Node *root){
+    void threadedPostorder(Node *root){
         if(!root) return;
         Node *cur = root;
         while(cur){
