@@ -71,17 +71,6 @@ public:
             else cur = cur->right->right;
         }
     }
-
-    void threadedPostorder(Node *root){
-        if(!root) return;
-        Node *cur = root;
-        while(cur){
-            cout << cur->data << " ";
-            if(!cur->lthread) cur = cur->left;
-            else if(!cur->rthread) cur = cur->right;
-            else cur = cur->right->right;
-        }
-    }    
 };
 
 int main() {
@@ -97,8 +86,8 @@ int main() {
     root = tree.BuildTree(root, 13);
     root = tree.BuildTree(root, 15);
 
-    // cout << "\nInorder Sequence : \n";
-    // tree.threadedInorder(root);
+    cout << "\nInorder Sequence : \n";
+    tree.threadedInorder(root);
     cout << "\nPreorder Sequence : \n";
     tree.threadedPreorder(root);
 
